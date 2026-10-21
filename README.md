@@ -1,2 +1,1 @@
-# ALU Higher Level Programming
- - Task 0 completed
+# ALU Higher Level Programming - Python Hello World
