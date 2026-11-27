@@ -1,17 +1,22 @@
 #!/usr/bin/python3
-"""Script that appends CLI arguments to add_item.json."""
+"""Script that adds all command-line arguments to a list in add_item.json."""
+import os
 import sys
+
+_DIR = os.path.dirname(os.path.abspath(__file__))
+if _DIR not in sys.path:
+    sys.path.insert(0, _DIR)
 
 save_to_json_file = __import__('5-save_to_json_file').save_to_json_file
 load_from_json_file = __import__('6-load_from_json_file').load_from_json_file
 
 
 def main():
-    """Load existing list from add_item.json, extend with argv, and save."""
+    """Load items from add_item.json if present, append argv, and save."""
     filename = "add_item.json"
-    try:
+    if os.path.exists(filename):
         items = load_from_json_file(filename)
-    except FileNotFoundError:
+    else:
         items = []
 
     items.extend(sys.argv[1:])
